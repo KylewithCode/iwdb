@@ -74,5 +74,28 @@ module.exports = function(app, db) {
   app.get('/add-review/:title/:table', function (req,res) {
     res.render('addReview', {table: req.params.table, title: req.params.title});
   });
+  app.post('/add-review/:table', urlencodeParser, function (req,res) {
+    if (true) { //Create SQL command
+      var item = req.body;
+      var fields = `(title`;
+      var values = `("${item.title}"`;
+      if (item.rating != "") {
+        fields += `,rating`
+        values += `,${item.rating}`
+      } if (item.review != "") {
+        fields += `,review`
+        values += `,"${item.review}"`
+      }
+      fields += `)`
+      values += `)`
+
+      var sql = `INSERT INTO ${req.params.table} ${fields} VALUES ${values};`
+      // console.log(sql);
+    }
+    db.query(sql, (err,results) => {
+      if (err) throw err;
+      res.json(results);
+    })
+  });
 
 }

@@ -2,6 +2,8 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <style media="screen"> #siteInfo{display: none;} </style>
     <title>Add a Review</title>
   </head>
   <body>
@@ -12,6 +14,10 @@
     <input type="text" id="rating" placeholder="Rating out of 10"> <br> <br>
     <textarea type="text" id="review" placeholder="Add review here..."></textarea> <br> <br>
     <button type="submit" id="submit">Submit</button><br><br>
+
+    <div id="siteInfo">
+      <textarea rows="1" cols="1" id="siteTable"><%= table %></textarea>
+    </div>
 
     <a href="/">Go home.</a>
 
