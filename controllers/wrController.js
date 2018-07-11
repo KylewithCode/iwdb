@@ -33,14 +33,14 @@ module.exports = function(app, db) {
   });
   app.post('/add-new-site', urlencodeParser, function (req, res) {
     var item = req.body;
+    var tableName = item.title.split(' ').join('_') + '_reviews';
+    var sql = `INSERT INTO websites (title,description,link) ` +
+      `VALUES ("${item.title}","${item.description}","${item.link}"); ` +
+      `CREATE TABLE ${tableName} ` +
+      `(id int AUTO_INCREMENT NOT NULL, rating int, title varchar(255), review text, PRIMARY_KEY(id));`
     console.log(item);
-    // var sql = 'INSERT INTO articleTable SET ?';
-    // db.query(sql, item, (err, results) => {
-    //   if (err) throw err;
-    //   console.log(results);
-    //   res.json(results);
-    // })
-  })
-
+    console.log(tableName);
+    console.log(sql);
+    })
 
 }
