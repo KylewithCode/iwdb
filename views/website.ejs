@@ -22,6 +22,8 @@
 
       <p>
         <%= website[id].description %>
+        <% if (average > 0 && average < 11) %>
+          <span> | Average Rating: <%= average%></span>
       </p>
       <a href="//<%= website[id].link %>">Go to <%= website[id].title %></a>
     </div> <hr>
