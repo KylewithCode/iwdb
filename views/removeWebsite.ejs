@@ -5,6 +5,11 @@
     <title>Remove a Website</title>
   </head>
   <body>
-    Hello, World
+    <h1>Websites:</h1>
+    <ul>
+      <% for(var i=0; i < websites.length; i++) { %>
+      <li><%= websites[i].title %></li>
+      <% } %>
+    </ul>
   </body>
 </html>

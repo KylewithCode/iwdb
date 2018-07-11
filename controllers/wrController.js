@@ -52,7 +52,13 @@ module.exports = function(app, db) {
   })
 
   app.get('/remove-site', function (req,res) {
-    res.render('removeWebsite');
+    var sql = 'SELECT * FROM websites;'
+    db.query(sql, (err, results) => {
+      if (err) throw err;
+      console.log(results);
+      res.render('removeWebsite', {websites: results});
+      console.log('Everything is fine.');
+    })
   });
 
 }
