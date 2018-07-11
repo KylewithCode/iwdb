@@ -48,7 +48,6 @@ module.exports = function(app, db) {
         res.json(results);
       })
     })
-
   })
 
   app.get('/remove-site', function (req,res) {
@@ -61,8 +60,15 @@ module.exports = function(app, db) {
     })
   });
   app.delete('/remove-site/:table/:id', function (req,res) {
-    console.log(req.params.id);
-    console.log(req.params.table);
+    var sql1 = `DELETE FROM websites WHERE id=${req.params.id}`
+    var sql2 = `DROP TABLE ${req.params.table}`
+    db.query(sql1, (err, results) => {
+      if (err) throw err;
+      db.query(sql2, (err, results) => {
+        if (err) throw err;
+        res.json(results);
+      })
+    })
   })
 
 }

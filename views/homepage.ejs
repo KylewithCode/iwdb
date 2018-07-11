@@ -7,8 +7,12 @@
   <body>
     <h1>Website Reviews</h1>
     <ul>
-      <% for(var i=0; i < websites.length; i++) { %>
-      <li><a href="/website/<%= i %>"><%= websites[i].title %></a></li>
+      <% if (websites.length > 0) { %>
+        <% for(var i=0; i < websites.length; i++) { %>
+        <li><a href="/website/<%= i %>"><%= websites[i].title %></a></li>
+        <% } %>
+      <% } else { %>
+        <p>There are no websites available :(</p>
       <% } %>
     </ul>
     <a href="/add-new-site">Add a New Website...</a> <br>
