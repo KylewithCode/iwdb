@@ -22,24 +22,29 @@
 
       <p>
         <%= website[id].description %>
-        <% if (average > 0 && average < 11) %>
-          <span> | Average Rating: <%= average%></span>
+        <% if (average > 0 && average < 11) {%> <!-- If there is a valid average rating -->
+          <span> | Average Rating: <%= average%></span> <!-- Show it -->
+        <% } %>
       </p>
       <a href="//<%= website[id].link %>">Go to <%= website[id].title %></a>
     </div> <hr>
-    <div id="reviews">
-      <h2>Reviews:</h2>
-      <% for (var i = (reviews.length - 1); i >= 0; i--) { %>
-      <div id="review">
-        <h3><%= reviews[i].title %>
-        <% if(reviews[i].rating != null) { %> - <%= reviews[i].rating %>/10 <% } %> </h3> <!-- If rating != null, show it -->
-        <p><%= reviews[i].review %></p>
+
+    <% if (reviews.length > 0) { %>
+      <div id="reviews">
+        <h2><u>Reviews (<%= reviews.length %>)</u></h2>
+        <% for (var i = (reviews.length - 1); i >= 0; i--) { %>
+        <div id="review">
+          <h3><%= reviews[i].title %>
+          <% if(reviews[i].rating != null) { %> - <%= reviews[i].rating %>/10 <% } %> </h3> <!-- If rating != null, show it -->
+          <p><%= reviews[i].review %></p>
+        </div>
+        <br>
+        <% } %>
       </div>
-      <br>
-      <% } %>
-    </div>
+    <% } else { %><p>This website has no reviews :(</p><% } %>
 
     <hr>
+
     <a href="/">Go home.</a>
 
   </body>
