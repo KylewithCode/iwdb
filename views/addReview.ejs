@@ -5,6 +5,16 @@
     <title>Add a Review</title>
   </head>
   <body>
-    <%= table %>
+    <% var titleSpaces = title.toString().split('_').join(' ') %>
+    <h1>Review <%= titleSpaces %>:</h1>
+
+    <input type="text" id="title" placeholder="Review Title (Required)"> <br> <br>
+    <input type="text" id="rating" placeholder="Rating out of 10"> <br> <br>
+    <textarea type="text" id="review" placeholder="Add review here..."></textarea> <br> <br>
+    <button type="submit" id="submit">Submit</button><br><br>
+
+    <a href="/">Go home.</a>
+
+    <script type="text/javascript" src="/js/addReview.js"></script>
   </body>
 </html>
