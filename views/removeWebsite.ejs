@@ -2,14 +2,17 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <title>Remove a Website</title>
   </head>
   <body>
     <h1>Websites:</h1>
     <ul>
       <% for(var i=0; i < websites.length; i++) { %>
-      <li><%= websites[i].title %></li>
+      <li id="<%= websites[i].id %>" class="<%= websites[i].title %>"><%= websites[i].title %></li>
       <% } %>
     </ul>
+
+    <script type="text/javascript" src="/js/removeWebsite.js"></script>
   </body>
 </html>

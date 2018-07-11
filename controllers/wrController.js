@@ -60,5 +60,9 @@ module.exports = function(app, db) {
       console.log('Everything is fine.');
     })
   });
+  app.delete('/remove-site/:table/:id', function (req,res) {
+    console.log(req.params.id);
+    console.log(req.params.table);
+  })
 
 }
