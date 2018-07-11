@@ -32,15 +32,23 @@ module.exports = function(app, db) {
     res.render('addWebsite');
   });
   app.post('/add-new-site', urlencodeParser, function (req, res) {
+
     var item = req.body;
     var tableName = item.title.split(' ').join('_') + '_reviews';
-    var sql = `INSERT INTO websites (title,description,link) ` +
-      `VALUES ("${item.title}","${item.description}","${item.link}"); ` +
-      `CREATE TABLE ${tableName} ` +
-      `(id int AUTO_INCREMENT NOT NULL, rating int, title varchar(255), review text, PRIMARY_KEY(id));`
-    console.log(item);
-    console.log(tableName);
-    console.log(sql);
+    var sql1 = `INSERT INTO websites (title,description,link) ` +
+      `VALUES ("${item.title}","${item.description}","${item.link}");`
+    var sql2 = `CREATE TABLE ${tableName} ` +
+      `(id int AUTO_INCREMENT NOT NULL, rating int, title varchar(255), review text, PRIMARY KEY(id));`
+
+    db.query(sql1, (err, results) => {
+      if (err) throw err;
+      db.query(sql2, (err, results) => {
+        if (err) throw err;
+        console.log(results);
+        res.json(results);
+      })
     })
+
+  })
 
 }
