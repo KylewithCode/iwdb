@@ -31,6 +31,16 @@ module.exports = function(app, db) {
   app.get('/add-new-site', function (req,res) {
     res.render('addWebsite');
   });
+  app.post('/add-new-site', urlencodeParser, function (req, res) {
+    var item = req.body;
+    console.log(item);
+    // var sql = 'INSERT INTO articleTable SET ?';
+    // db.query(sql, item, (err, results) => {
+    //   if (err) throw err;
+    //   console.log(results);
+    //   res.json(results);
+    // })
+  })
 
 
 }

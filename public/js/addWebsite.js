@@ -11,7 +11,7 @@ $('button').on('click', function () {
   else {
     $.ajax({
       type: 'POST',
-      url: '/new',
+      url: '/add-new-site',
       data: site,
       success: function (data) {
         alert("Website was successfully submitted.");
