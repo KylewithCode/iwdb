@@ -48,7 +48,7 @@ module.exports = function(app, db) {
         res.json(results);
       })
     })
-  })
+  });
 
   app.get('/remove-site', function (req,res) {
     var sql = 'SELECT * FROM websites;'
@@ -70,5 +70,9 @@ module.exports = function(app, db) {
       })
     })
   })
+
+  app.get('/add-review/:title/:table', function (req,res) {
+    res.render('addReview', {table: req.params.table, title: req.params.title});
+  });
 
 }
