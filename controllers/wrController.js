@@ -51,4 +51,8 @@ module.exports = function(app, db) {
 
   })
 
+  app.get('/remove-site', function (req,res) {
+    res.render('removeWebsite');
+  });
+
 }
