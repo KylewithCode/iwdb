@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Reviews: <%= website[id].title %></title>
+  </head>
+  <body>
+    <div id="siteInfo">
+      <h1><%= website[id].title %></h1>
+
+      <a href="//<%= website[id].link %>">Go to <%= website[id].title %></a>
+    </div> <hr>
+    <div id="reviews">
+      <h2>Reviews:</h2>
+      <% for (var i = (reviews.length - 1); i >= 0; i--) { %>
+      <div id="review">
+        <h3><%= reviews[i].title %>
+        <% if(reviews[i].rating != null) { %> - <%= reviews[i].rating %>/10 <% } %> </h3> <!-- If rating != null, show it -->
+        <p><%= reviews[i].review %></p>
+      </div>
+      <br>
+      <% } %>
+    </div>
+
+    <hr>
+    <a href="/">Go home.</a>
+
+  </body>
+</html>

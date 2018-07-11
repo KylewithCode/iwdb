@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Website Review</title>
+  </head>
+  <body>
+    <h1>Website Reviews</h1>
+    <ul>
+      <% for(var i=0; i < websites.length; i++) { %>
+      <li><a href="/website/<%= i %>"><%= websites[i].title %></a></li>
+      <% } %>
+    </ul>
+    <a href="/add-new-site">Add a New Website...</a>
+  </body>
+</html>
