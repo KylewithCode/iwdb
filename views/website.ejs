@@ -37,7 +37,7 @@
 
     <% var title = website[id].title.toString().split(' ').join('_'); %>
     <% var table = title + '_reviews' %>
-    <a href="/add-review/<%= title %>/<%= table %>">Review <%= website[id].title %></a> <br>
+    <a href="/add-review/<%= title %>">Review <%= website[id].title %></a> <br>
     <a href="/">Go home.</a>
 
   </body>

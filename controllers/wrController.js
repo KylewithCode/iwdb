@@ -1,6 +1,13 @@
 const bodyParser = require('body-parser');
 const urlencodeParser = bodyParser.urlencoded({extended: false});
 
+function fixSqlQuotes(str) {
+  return str.toString().split('\"').join('\"\"');
+}
+function tableify(str) {
+  return str.toString().split(' ').join('_') + '_reviews';
+}
+
 module.exports = function(app, db) {
 
   app.get('/', function (req, res) {
@@ -19,7 +26,7 @@ module.exports = function(app, db) {
       if (err) throw err;
       console.log(results[req.params.id].title); //Logs title of website with :id
       //turns title into table name: Replaces all spaces with underscores and adds '_reviews' to the end.
-      var table = results[req.params.id].title.split(' ').join('_') + '_reviews';
+      var table = tableify(results[req.params.id].title);
       var sql2 =  `SELECT * FROM ${table};`;
       db.query(sql2, (err, results2) => { //Second database query (Within first query)
         console.log(results2);
@@ -46,10 +53,14 @@ module.exports = function(app, db) {
   app.post('/add-new-site', urlencodeParser, function (req, res) {
 
     var item = req.body;
-    var tableName = item.title.split(' ').join('_') + '_reviews';
+    var table = tableify(item.title);
+    var title = fixSqlQuotes(item.title);
+    var description = fixSqlQuotes(item.description);
+    var link = fixSqlQuotes(item.link);
+
     var sql1 = `INSERT INTO websites (title,description,link) ` +
-      `VALUES ("${item.title}","${item.description}","${item.link}");`
-    var sql2 = `CREATE TABLE ${tableName} ` +
+      `VALUES ("${title}","${description}","${link}");`
+    var sql2 = `CREATE TABLE ${table} ` +
       `(id int AUTO_INCREMENT NOT NULL, rating int, title varchar(255), review text, PRIMARY KEY(id));`
     console.log(sql1);
     console.log(sql2);
@@ -85,26 +96,26 @@ module.exports = function(app, db) {
     })
   })
 
-  app.get('/add-review/:title/:table', function (req,res) {
-    res.render('addReview', {table: req.params.table, title: req.params.title});
+  app.get('/add-review/:title', function (req,res) {
+    res.render('addReview', {title: req.params.title});
   });
-  app.post('/add-review/:table', urlencodeParser, function (req,res) {
+  app.post('/add-review/:title', urlencodeParser, function (req,res) {
     if (true) { //Create SQL command
       var item = req.body;
       var fields = `(title`;
-      var values = `("${item.title}"`;
+      var values = `("${fixSqlQuotes(item.title)}"`;
       if (item.rating != "") {
         fields += `,rating`
         values += `,${item.rating}`
       } if (item.review != "") {
         fields += `,review`
-        values += `,"${item.review}"`
+        values += `,"${fixSqlQuotes(item.review)}"`
       }
       fields += `)`
       values += `)`
 
-      var sql = `INSERT INTO ${req.params.table} ${fields} VALUES ${values};`
-      // console.log(sql);
+      var sql = `INSERT INTO ${tableify(req.params.title)} ${fields} VALUES ${values};`
+      console.log(sql);
     }
     db.query(sql, (err,results) => {
       if (err) throw err;

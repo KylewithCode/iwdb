@@ -2,8 +2,8 @@ $('button').on('click', function () {
   var newTitle = $('#title').val();
   var newRating = $('#rating').val();
   var newReview = $('#review').val();
-  var siteTable = $('#siteTable').val();
-  console.log(siteTable);
+  var siteTitle = $('#siteTitle').val();
+  console.log(siteTitle);
   var review = {title: newTitle, rating: newRating, review: newReview};
   console.log(review);
 
@@ -15,7 +15,7 @@ $('button').on('click', function () {
   else {
     $.ajax({
       type: 'POST',
-      url: `/add-review/${siteTable}`,
+      url: `/add-review/${siteTitle}`,
       data: review,
       success: function (data) {
         alert("Review was successfully submitted.");
