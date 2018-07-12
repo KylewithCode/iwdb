@@ -23,7 +23,19 @@ module.exports = function(app, db) {
       var sql2 =  `SELECT * FROM ${table};`;
       db.query(sql2, (err, results2) => { //Second database query (Within first query)
         console.log(results2);
-        res.render('website', {reviews: results2, website: results, id: req.params.id}); //Renders page (finally)
+
+        // Calculate average review score
+        var total = 0;
+        var amountOfRatings = 0
+        for (var i = 0; i < results2.length; i++) {
+          if (results2[i].rating !== null) {
+            total += results2[i].rating;
+            amountOfRatings++;
+          }
+        }
+        var averageRating = total/amountOfRatings;
+
+        res.render('website', {reviews: results2, website: results, id: req.params.id, average: averageRating}); //Renders page (finally)
       })
     })
   });
@@ -39,6 +51,8 @@ module.exports = function(app, db) {
       `VALUES ("${item.title}","${item.description}","${item.link}");`
     var sql2 = `CREATE TABLE ${tableName} ` +
       `(id int AUTO_INCREMENT NOT NULL, rating int, title varchar(255), review text, PRIMARY KEY(id));`
+    console.log(sql1);
+    console.log(sql2);
 
     db.query(sql1, (err, results) => {
       if (err) throw err;

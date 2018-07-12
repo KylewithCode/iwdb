@@ -9,21 +9,10 @@
     <div id="siteInfo">
       <h1><%= website[id].title %></h1>
 
-      <!-- Calculate Average Rating -->
-      <% var average = 0; %> <!-- Combined ratings -->
-      <% var ratings = 0; %> <!-- Amount of valid ratings -->
-      <% for (var i = 0; i < reviews.length; i++) { %>
-        <% if (reviews[i].rating > 0 && reviews[i].rating < 11) { %> <!-- If rating is not 1-10 -->
-          <% average += reviews[i].rating; %> <!-- Add rating to average -->
-          <% ratings++; %> <!-- Increment the amount of valid ratings -->
-        <% } %>
-      <% } %>
-      <% average /= ratings; %> <!-- Calculate mean (average) of combined ratings -->
-
       <p>
         <%= website[id].description %>
         <% if (average > 0 && average < 11) {%> <!-- If there is a valid average rating -->
-          <span> | Average Rating: <%= average%></span> <!-- Show it -->
+          <span> | Average Rating: <%= average %></span> <!-- Show it -->
         <% } %>
       </p>
       <a href="//<%= website[id].link %>">Go to <%= website[id].title %></a>
@@ -35,7 +24,8 @@
         <% for (var i = (reviews.length - 1); i >= 0; i--) { %>
         <div id="review">
           <h3><%= reviews[i].title %>
-          <% if(reviews[i].rating != null) { %> - <%= reviews[i].rating %>/10 <% } %> </h3> <!-- If rating != null -->
+          <% if(reviews[i].rating != null) { %> - <%= reviews[i].rating %>/10 <% } %> <!-- If rating != null -->
+          <button type="button">Delete</button> </h3>
           <p><%= reviews[i].review %></p> <!-- Show it -->
         </div>
         <br>
