@@ -123,4 +123,13 @@ module.exports = function(app, db) {
     })
   });
 
+  app.delete('/delete-review/:title/:id', function (req,res) {
+    var sql = `DELETE FROM ${tableify(req.params.title)} WHERE id=${req.params.id};`
+    console.log(sql);
+    db.query(sql, (err, results) => {
+      if (err) throw err;
+      res.json(results);
+    })
+  });
+
 }
