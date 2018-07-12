@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <title>Website Review</title>
   </head>
   <body>
@@ -9,13 +10,19 @@
     <ul>
       <% if (websites.length > 0) { %>
         <% for(var i=0; i < websites.length; i++) { %>
-        <li><a href="/website/<%= i %>"><%= websites[i].title %></a></li>
+        <li><a href="/website/<%= i %>"><%= websites[i].title %></a>
+        <button type="button" id="button<%= i %>">Edit</button></li>
         <% } %>
       <% } else { %>
         <p>There are no websites available :(</p>
       <% } %>
     </ul>
+
     <a href="/add-new-site">Add a New Website...</a> <br>
     <a href="/remove-site">Remove and existing Website...</a>
+
+    <script type="text/javascript" src="/js/homepage/editSite.js"></script>
+
   </body>
+
 </html>
