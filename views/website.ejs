@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <style media="screen"> #infoHidden{display: none;} </style>
+    <style media="screen"> #infoHidden{display: none;} .editReview{display: none;} </style>
     <title>Reviews: <span id="websiteTitle"><%= website[id].title %></span></title>
   </head>
   <body>
@@ -28,11 +28,19 @@
       <div id="reviews">
         <h2><u>Reviews (<%= reviews.length %>)</u></h2>
         <% for (var i = (reviews.length - 1); i >= 0; i--) { %>
-        <div id="review">
+        <div id="review<%= reviews[i].id %>">
           <h3><%= reviews[i].title %>
           <% if(reviews[i].rating != null) { %> - <%= reviews[i].rating %>/10 <% } %> <!-- If rating isn't null, show it -->
-          <button type="button" id="<%= reviews[i].id %>">Delete</button> </h3>
+          <button type="button" id="<%= reviews[i].id %>" class="editRev">Edit</button>
+          <button type="button" id="<%= reviews[i].id %>" class="deleteRev">Delete</button> </h3>
           <p><%= reviews[i].review %></p>
+        </div>
+        <div id="editReview<%= reviews[i].id %>" class="editReview">
+            <textarea id="title<%= reviews[i].id %>"><%= reviews[i].title %></textarea>
+            <textarea id="rating<%= reviews[i].id %>"><%= reviews[i].rating %></textarea> <br> <br>
+            <textarea id="rev<%= reviews[i].id %>"><%= reviews[i].review %></textarea>
+            <button type="button" id="<%= reviews[i].id %>" class="cancelRev">Cancel</button>
+            <button type="button" id="<%= reviews[i].id %>" class="submitRev">Submit</button>
         </div>
         <br>
         <% } %>
@@ -46,7 +54,8 @@
     <a href="/add-review/<%= title %>">Review <%= website[id].title %></a> <br>
     <a href="/">Go home.</a>
 
-    <script type="text/javascript" src="/js/deleteReview.js"></script>
+    <script type="text/javascript" src="/js/website/deleteReview.js"></script>
+    <script type="text/javascript" src="/js/website/editReview.js"></script>
 
   </body>
 </html>

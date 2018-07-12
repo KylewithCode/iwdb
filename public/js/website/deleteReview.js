@@ -1,4 +1,4 @@
-$('button').on('click', function () {
+$('.deleteRev').on('click', function () {
 
   console.log('button item clicked');
   var id = $(this).attr('id');

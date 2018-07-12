@@ -9,7 +9,7 @@ $('button').on('click', function () {
 
   console.log(newTitle);
 
-  if (newTitle === "") alert('A Website Title is required');
+  if (newTitle === "") alert('A Title is required');
   else if (newRating !== "" && newRating < 1 || newRating > 10) alert('Rating must either be a number between 1 and 10, or be left empty.');
   else if (isNaN(newRating)) alert('Rating must either be a number between 1 and 10, or be left empty.')
   else {

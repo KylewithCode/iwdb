@@ -132,4 +132,15 @@ module.exports = function(app, db) {
     })
   });
 
+  app.post('/edit-review/:title/:id', urlencodeParser, function (req,res) {
+    var item = req.body;
+    var tableName = tableify(req.params.title);
+    sql = `UPDATE ${tableName} SET rating=${item.rating}, title="${item.title}", review="${item.review}" ` +
+      `WHERE id=${req.params.id};`;
+    db.query(sql, (err,results) => {
+      if (err) throw err;
+      res.json(results);
+    })
+  });
+
 }
