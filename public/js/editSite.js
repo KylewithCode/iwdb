@@ -1,8 +1,6 @@
-$('#editButton').on('click', function () {
-  var info = $(this).attr('class');
-  info = info.split('&&&');
-  info[1] = info[1].split(' ').join('_');
-  window.location.replace(`/edit-site/${info[1]}/${info[0]}`);
+$('.editButton').on('click', function () {
+  var id = $(this).attr('id');
+  window.location.replace(`/edit-site/${id}`);
 });
 
 $('.submitButton').on('click', function () {

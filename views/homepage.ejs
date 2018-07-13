@@ -9,13 +9,12 @@
   </head>
   <body>
     <div class="container text-center">
-
       <h1><u>Website Reviews</u></h1>
       <ul class="list-unstyled">
         <% if (websites.length > 0) { %>
           <% for(var i=0; i < websites.length; i++) { %>
-          <li><a href="/website/<%= i %>"><%= websites[i].title %></a>
-          <button type="button" id="editButton" class="<%= i %>&&&<%= websites[i].title %>">Edit</button></li>
+            <li><a href="/website/<%= i %>"><%= websites[i].title %></a>
+            <button type="button" id="<%= i %>" class="editButton btn btn-primary btn-sm">Edit</button></li>
           <% } %>
         <% } else { %>
           <p>There are no websites available :(</p>

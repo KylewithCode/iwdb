@@ -143,7 +143,7 @@ module.exports = function(app, db) {
     })
   });
 
-  app.get('/edit-site/:title/:id', function (req,res) {
+  app.get('/edit-site/:id', function (req,res) {
     var sql = 'SELECT * FROM websites;'
     db.query(sql, (err,results) => {
       if (err) throw err;
