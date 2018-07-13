@@ -1,0 +1,10 @@
+input#title {
+  width: 80%;
+}
+input#link{
+  width: 80%;
+}
+
+h1 {
+  padding-bottom: 0.25em;
+}

@@ -3,18 +3,23 @@
   <head>
     <meta charset="utf-8">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/addWebsite.css">
     <title>Add a New Website</title>
   </head>
   <body>
-    <h1 id="articletitle">Add Website</h1>
-    <input type="text" id="title" placeholder="Website Title"> <br> <br>
-    <input type="text" id="link" placeholder="Website URL"> <br> <br>
-    <textarea type="text" id="description" placeholder="Description of the website..."></textarea> <br> <br>
-    <button type="submit" id="submit">Submit</button>
+    <div class="container text-center">
 
-    <br><br><a href="/">Go home.</a>
+      <h1 id="articletitle"><u>Add Website</u></h1>
+      <input type="text" id="title" placeholder="Website Title"> <br> <br>
+      <input type="text" id="link" placeholder="Website URL"> <br> <br>
+      <textarea type="text" id="description" rows="10" cols="90" placeholder="Description of the website..."></textarea> <br> <br>
+      <button type="submit" id="submit" class="btn btn-success btn-lg">Submit</button>
 
-    <script type="text/javascript" src="/js/addWebsite.js"></script>
+      <br><br><a href="/">Go home</a>
 
+      <script type="text/javascript" src="/js/addWebsite.js"></script>
+
+    </div>
   </body>
 </html>

@@ -20,8 +20,8 @@ $('.submitRev').on('click', function () {
   var review = {title: newTitle, rating: newRating, review: newReview};
 
   if (newTitle === "") alert('A Title is required');
-  else if (newRating !== "" && newRating < 1 || newRating > 10) alert('Rating must either be a number between 1 and 10, or be left empty.');
-  else if (isNaN(newRating)) alert('Rating must either be a number between 1 and 10, or be left empty.')
+  else if (newRating !== "" && newRating < 0 || newRating > 10) alert('Rating must either be a number between 0 and 10, or be left empty.');
+  else if (isNaN(newRating)) alert('Rating must either be a number between 0 and 10, or be left empty.')
   else {
     $.ajax({
       type: 'POST',
@@ -30,6 +30,6 @@ $('.submitRev').on('click', function () {
       success : function (data) {
         location.reload();
       }
-    }) 
+    })
   }
 });

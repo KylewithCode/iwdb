@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/editSite.css">
+    <% titleSpaces = title.toString().split('_').join(' '); %>
+    <title>Edit <%= titleSpaces %></title>
+  </head>
+  <body>
+    <div class="container text-center">
+
+      <h1 id="articletitle">Edit <%= titleSpaces %></h1>
+      <p>Website Title cannot be changed.</p>
+      <textarea type="text" id="link" placeholder="Website URL"><%= websites[id].link %></textarea> <br> <br>
+      <textarea type="text" id="description" placeholder="Description of the website..."><%=websites[id].description %></textarea> <br> <br>
+      <button type="submit" id="<%= websites[id].id %>" class="submitButton btn btn-success btn-lg">Submit</button>
+
+      <br><br><a href="/">Go home.</a>
+
+      <script type="text/javascript" src="/js/editSite.js"></script>
+
+    </div>
+  </body>
+</html>

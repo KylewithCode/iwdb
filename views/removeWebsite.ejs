@@ -4,17 +4,23 @@
     <meta charset="utf-8">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <style media="screen"> li:hover{text-decoration: line-through;} </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/removeWebsite.css">
     <title>Remove a Website</title>
   </head>
   <body>
-    <h1>Websites:</h1>
-    <ul>
-      <% for(var i=0; i < websites.length; i++) { %>
-      <li id="<%= websites[i].id %>" class="<%= websites[i].title %>"><%= websites[i].title %></li>
-      <% } %>
-    </ul>
+    <div class="container text-center">
 
-    <a href="/">Go home.</a>
-    <script type="text/javascript" src="/js/removeWebsite.js"></script>
+      <p id="explanation"><u>Hover over and click on a website to delete it.</u></p>
+      <ul class="list-unstyled">
+        <% for(var i=0; i < websites.length; i++) { %>
+        <li id="<%= websites[i].id %>" class="<%= websites[i].title %>"><%= websites[i].title %></li>
+        <% } %>
+      </ul>
+
+      <a href="/">Go home</a>
+      <script type="text/javascript" src="/js/removeWebsite.js"></script>
+
+    </div>
   </body>
 </html>

@@ -4,23 +4,29 @@
     <meta charset="utf-8">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <style media="screen"> #siteInfo{display: none;} </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/addReview.css">
     <title>Add a Review</title>
   </head>
   <body>
-    <% var titleSpaces = title.toString().split('_').join(' ') %>
-    <h1>Review <%= titleSpaces %>:</h1>
+    <div class="container text-center">
 
-    <input type="text" id="title" placeholder="Review Title (Required)"> <br> <br>
-    <input type="text" id="rating" placeholder="Rating out of 10"> <br> <br>
-    <textarea type="text" id="review" placeholder="Add review here..."></textarea> <br> <br>
-    <button type="submit" id="submit">Submit</button><br><br>
+      <% var titleSpaces = title.toString().split('_').join(' ') %>
+      <h1><u>Review <%= titleSpaces %></u></h1>
 
-    <div id="siteInfo">
-      <textarea rows="1" cols="1" id="siteTitle"><%= title %></textarea>
+      <input type="text" id="title" placeholder="Review Title (Required)">
+      <input type="text" id="rating" placeholder="Rating"> <br> <br>
+      <textarea type="text" id="review" rows="10" cols="80" placeholder="Add review here..."></textarea> <br> <br>
+      <button type="submit" id="submit" class="btn btn-success btn-lg">Submit</button><br><br>
+
+      <div id="siteInfo">
+        <textarea rows="1" cols="1" id="siteTitle"><%= title %></textarea>
+      </div>
+
+      <a href="/" id="goHome">Go home</a>
+
+      <script type="text/javascript" src="/js/addReview.js"></script>
+
     </div>
-
-    <a href="/">Go home.</a>
-
-    <script type="text/javascript" src="/js/addReview.js"></script>
   </body>
 </html>

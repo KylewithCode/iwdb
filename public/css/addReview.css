@@ -1,0 +1,10 @@
+input#title {
+  width: 60%;
+}
+input#rating{
+  width: 10%;
+}
+
+h1 {
+  padding-bottom: 0.25em;
+}

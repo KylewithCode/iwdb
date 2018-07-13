@@ -14,7 +14,7 @@ module.exports = function(app, db) {
     var sql = 'SELECT * FROM websites;'
     db.query(sql, (err, results) => {
       if (err) throw err;
-      console.log(results);
+      // console.log(results);
       res.render('homepage', {websites: results});
       console.log('Everything is fine.');
     })
@@ -29,7 +29,7 @@ module.exports = function(app, db) {
       var table = tableify(results[req.params.id].title);
       var sql2 =  `SELECT * FROM ${table};`;
       db.query(sql2, (err, results2) => { //Second database query (Within first query)
-        console.log(results2);
+        // console.log(results2);
 
         // Calculate average review score
         var total = 0;
@@ -142,5 +142,22 @@ module.exports = function(app, db) {
       res.json(results);
     })
   });
+
+  app.get('/edit-site/:title/:id', function (req,res) {
+    var sql = 'SELECT * FROM websites;'
+    db.query(sql, (err,results) => {
+      if (err) throw err;
+      res.render('editWebsite', {title: req.params.title, id: req.params.id, websites: results});
+    })
+  });
+  app.post('/edit-site/:id', urlencodeParser, function (req,res) {
+    item = req.body;
+    var sql = `UPDATE websites SET link="${item.link}", description="${item.description}" WHERE id=${req.params.id};`;
+    console.log(sql);
+    db.query(sql, (err,results) => {
+      if (err) throw err;
+      res.json(results);
+    })
+  })
 
 }
