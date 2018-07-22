@@ -1,0 +1,20 @@
+.revTitle {
+  width: 55%;
+  height: 2em;
+  resize: none;
+}
+.revRating {
+  width: 5%;
+  height: 2em;
+  resize: none;
+}
+.revReview {
+  width: 60%;
+  height: 10em;
+}
+
+#originalPoster {
+  color: darkgray;
+  font-size: 0.6em;
+  margin-left: 5px;
+}

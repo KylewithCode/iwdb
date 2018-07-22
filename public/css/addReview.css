@@ -1,8 +1,12 @@
 input#title {
-  width: 60%;
+  width: 70%;
 }
 input#rating{
   width: 10%;
+}
+textarea#review {
+  width: 80%;
+  height: 12em;
 }
 
 h1 {

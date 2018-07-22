@@ -5,6 +5,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <style media="screen"> #infoHidden{display: none;} .editReview{display: none;} </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/website.css">
     <title>Reviews: <%= website[id].title %></title>
   </head>
   <body>
@@ -16,6 +17,10 @@
       </div>
 
       <h1><span id="websiteTitle"><%= website[id].title %></span></h1>
+      <% if (!isNaN(maliciousPercent)) { %>
+      <p><strong><%= status %></strong><p>
+      <p><strong><%= maliciousPercent %>%</strong> of reviews said website is malicious</p>
+      <% } %>
 
       <p>
         <%= website[id].description %>
@@ -33,17 +38,24 @@
         <div id="review<%= reviews[i].id %>">
           <h3><%= reviews[i].title %>
           <% if(reviews[i].rating != null) { %> - <%= reviews[i].rating %>/10 <% } %> <!-- If rating isn't null, show it -->
-          <button type="button" id="<%= reviews[i].id %>" class="editRev btn btn-primary btn-sm">Edit</button>
-          <button type="button" id="<%= reviews[i].id %>" class="deleteRev btn btn-danger btn-sm">Delete</button> </h3>
+
+          <% if (user.firstname === reviews[i].originalPoster) { %> <!-- Show buttons if that user -->
+            <button type="button" id="<%= reviews[i].id %>" class="editRev btn btn-primary btn-sm">Edit</button>
+            <button type="button" id="<%= reviews[i].id %>" class="deleteRev btn btn-danger btn-sm">Delete</button> </h3>
+          <% } else { %> <span id="originalPoster">Posted by <%= reviews[i].originalPoster %>. </span></h3> <% } %>
+
           <p><%= reviews[i].review %></p>
+          <% if (reviews[i].malicious === 'yes') { %> <p>- Reported this website as malicious</p> <% } %>
         </div>
-        <div id="editReview<%= reviews[i].id %>" class="editReview">
-            <textarea id="title<%= reviews[i].id %>"><%= reviews[i].title %></textarea>
-            <textarea id="rating<%= reviews[i].id %>"><%= reviews[i].rating %></textarea> <br> <br>
-            <textarea id="rev<%= reviews[i].id %>"><%= reviews[i].review %></textarea>
-            <button type="button" id="<%= reviews[i].id %>" class="cancelRev btn btn-primary">Cancel</button>
-            <button type="button" id="<%= reviews[i].id %>" class="submitRev btn btn-success">Submit</button>
-        </div>
+        <% if (user.email === reviews[i].originalPoster) { %>
+          <div id="editReview<%= reviews[i].id %>" class="editReview">
+              <textarea id="title<%= reviews[i].id %>" class="revTitle"><%= reviews[i].title %></textarea>
+              <textarea id="rating<%= reviews[i].id %>" class="revRating"><%= reviews[i].rating %></textarea> <br> <br>
+              <textarea id="rev<%= reviews[i].id %>" class="revReview"><%= reviews[i].review %></textarea> <br> <br>
+              <button type="button" id="<%= reviews[i].id %>" class="cancelRev btn btn-primary">Cancel</button>
+              <button type="button" id="<%= reviews[i].id %>" class="submitRev btn btn-success">Submit</button>
+          </div>
+        <% } %>
         <br>
         <% } %>
       </div>

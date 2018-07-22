@@ -3,8 +3,10 @@ $('button').on('click', function () {
   var newRating = $('#rating').val();
   var newReview = $('#review').val();
   var siteTitle = $('#siteTitle').val();
+  if ($('#malicious').prop('checked')) var maliciousBool = 'yes';
+  else var maliciousBool = 'no';
   console.log(siteTitle);
-  var review = {title: newTitle, rating: newRating, review: newReview};
+  var review = {title: newTitle, rating: newRating, review: newReview, malicious: maliciousBool};
   console.log(review);
 
   console.log(newTitle);

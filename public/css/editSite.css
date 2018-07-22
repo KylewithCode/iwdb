@@ -1,6 +1,7 @@
 textarea#link {
   width: 70%;
   height: 2em;
+  resize: none;
 }
 
 textarea#description {

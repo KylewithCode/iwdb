@@ -1,12 +1,10 @@
 $('li').on('click', function () {
   //console.log('li item clicked');
   var id = $(this).attr('id');
-  var table = $(this).attr('class');
-  table = table.toString().split(' ').join('_') + '_reviews'
-  console.log(table);
+  var title = $(this).attr('class');
   $.ajax({
     type: 'DELETE',
-    url: '/remove-site/' + table + "/" + id,
+    url: '/remove-site/' + title + "/" + id,
     success: function () {
       //Code to do something with the response
       location.reload();

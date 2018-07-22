@@ -8,8 +8,6 @@ $('.submitButton').on('click', function () {
   var newLink = $('#link').val();
   var newDesc = $('#description').val();
   var site = {link: newLink, description: newDesc};
-  console.log('Got here');
-  console.log(site);
   $.ajax({
     type: 'POST',
     url: '/edit-site/' + id,
