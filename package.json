@@ -1,7 +1,7 @@
 {
-  "name": "todoapp",
+  "name": "IWDB",
   "version": "1.0.0",
-  "description": "This is a todo application ",
+  "description": "Internet Website Database",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
