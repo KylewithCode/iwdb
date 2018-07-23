@@ -1,5 +1,6 @@
-//load bcrypt
-var bCrypt = require('bcrypt-nodejs');
+
+  //load bcrypt
+  var bCrypt = require('bcrypt-nodejs');
 
 module.exports = function(passport,user){
 
@@ -25,7 +26,6 @@ module.exports = function(passport,user){
 
   });
 
-
   passport.use('local-signup', new LocalStrategy(
 
     {
@@ -36,12 +36,12 @@ module.exports = function(passport,user){
 
     function(req, email, password, done){
 
-
       var generateHash = function(password) {
       return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
       };
 
-       User.findOne({where: {email:email}}).then(function(user){
+      User.findOne({where: {email:email}}).then(function(user){
+      User.findOne({where: {username:req.body.username}}).then(function(user){
 
       if(user)
       {
@@ -55,7 +55,8 @@ module.exports = function(passport,user){
         { email:email,
         password:userPassword,
         firstname: req.body.firstname,
-        lastname: req.body.lastname
+        lastname: req.body.lastname,
+        username: req.body.username
         };
 
 
@@ -69,14 +70,12 @@ module.exports = function(passport,user){
 
           }
 
-
         });
+
       }
 
-
     });
-
-
+    });
 
   }
 

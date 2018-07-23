@@ -12,7 +12,7 @@ function tableify(str) {
 module.exports = function(app, db, passport) {
 
   // HOMEPAGE
-  app.get('/', isLoggedIn, function(req, res) {
+  app.get('/', function(req, res) {
     var sql = 'SELECT * FROM websites;'
     db.query(sql, (err, results) => {
       if (err) throw err;
@@ -57,7 +57,7 @@ module.exports = function(app, db, passport) {
     Brought in from Garfelo
   **************************/
 
-  app.get('/website/:id', isLoggedIn,  function (req, res) {
+  app.get('/website/:id', function (req, res) {
     var sql = 'SELECT * FROM websites;'
     db.query(sql, (err, results) => { //First database query
       if (err) throw err;
@@ -93,6 +93,7 @@ module.exports = function(app, db, passport) {
 
         var maliciousPercent = (100 * totalMalicious) / results2.length;
         maliciousPercent = Math.round(maliciousPercent * 100) / 100
+        console.log('user: ' + req.user);
 
         res.render('website', {
           reviews: results2,
@@ -172,7 +173,7 @@ module.exports = function(app, db, passport) {
         values += `,"${fixSqlQuotes(item.review)}"`
       }
       fields += `,malicious, originalPoster)`
-      values += `,"${item.malicious}", "${req.user.email}")`
+      values += `,"${item.malicious}", "${req.user.username}")`
 
       var sql = `INSERT INTO ${tableify(req.params.title)} ${fields} VALUES ${values};`
       console.log(sql);
