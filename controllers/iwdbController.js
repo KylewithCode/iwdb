@@ -27,13 +27,15 @@ module.exports = function(app, db, passport) {
 
   // display sign up
   app.get('/signup', function(req, res) {
-    res.render('signup');
+    if (req.query.failed === 'true') var message = ['Something went wrong with your signup.', 'Your username or email may have already been taken.'];
+    else var message = null;
+    res.render('signup', {message: message});
   });
 
   // handling sign up form
   app.post('/signup', passport.authenticate('local-signup',  {
      successRedirect: '/',
-     failureRedirect: '/signup'}
+     failureRedirect: '/signup?failed=' + true}
     )
   );
 
