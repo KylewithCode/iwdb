@@ -16,8 +16,11 @@ module.exports = function(app, db, passport) {
     var sql = 'SELECT * FROM websites;'
     db.query(sql, (err, results) => {
       if (err) throw err;
-      // console.log(results);
-      res.render('homepage', {websites: results, user: req.user});
+
+      if (req.query.loggedout === 'true') var message = 'Logged out successfully.';
+      else var message = null;
+
+      res.render('homepage', {websites: results, user: req.user, message: message});
       console.log('Everything is fine.');
     })
   });
@@ -36,7 +39,7 @@ module.exports = function(app, db, passport) {
 
   // displaying sign in
   app.get('/signin', function(req,res){
-  	res.render('signin',  { message: req.flash('loginMessage') } );
+  	res.render('signin', { message: req.flash('loginMessage') } );
   });
 
   // handling sign in form
@@ -49,7 +52,8 @@ module.exports = function(app, db, passport) {
   // destorying sessions
   app.get('/logout', function(req,res) {
     req.session.destroy(function(err) {
-    res.redirect('/signin');
+    var loggedout = true;
+    res.redirect('/?loggedout=' + loggedout);
     })
   });
 
