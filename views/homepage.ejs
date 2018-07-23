@@ -9,6 +9,7 @@
   </head>
   <body>
     <div class="container text-center">
+      <% if (message !== null) { %> <div class="alert alert-success" id="message"><%= message %></div> <% } %>
       <h1><u>Available Websites</u></h1>
       <ul class="list-unstyled">
         <% if (websites.length > 0) { %>
@@ -26,7 +27,8 @@
       <div class="siteOptions">
         <a href="/add-new-site">Add a New Website...</a> <br>
         <a href="/remove-site">Remove and existing Website...</a> <br>
-        <a href="/logout">Logout</a>
+        <% if (user === undefined) { %> <a href="/signin">Login</a>
+        <% } else { %>  <a href="/logout">Logout</a>  <% } %>
       </div>
 
       <script type="text/javascript" src="/js/editSite.js">
