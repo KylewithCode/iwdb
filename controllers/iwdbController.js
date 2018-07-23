@@ -122,7 +122,7 @@ module.exports = function(app, db, passport) {
     var sql1 = `INSERT INTO websites (title,description,link) ` +
       `VALUES ("${title}","${description}","${link}");`
     var sql2 = `CREATE TABLE ${table} ` +
-      `(id int AUTO_INCREMENT NOT NULL, rating int, title varchar(255), review text, malicious varchar(3), PRIMARY KEY(id));`
+      `(id int AUTO_INCREMENT NOT NULL, rating int, title varchar(255), review text, malicious varchar(3), originalPoster varchar(255), PRIMARY KEY(id));`
     console.log(sql1);
     console.log(sql2);
 
