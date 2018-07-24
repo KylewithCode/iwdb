@@ -22,7 +22,10 @@
         <% if (websites.length > 0) { %>
           <% for(var i=0; i < websites.length; i++) { %>
             <li><a href="/website/<%= i %>"><%= websites[i].title %></a>
-            <button type="button" id="<%= i %>" class="editButton btn btn-primary btn-sm">Edit</button></li>
+            <% if (user !== undefined) { %>
+            <% if (user.id == websites[i].createdBy) { %>
+              <button type="button" id="<%= i %>" class="editButton btn btn-primary btn-sm">Edit</button></li>
+            <% } else { %></li><% }} %>
           <% } %>
         <% } else { %>
           <p>No results found... Do you want to help us? If so, Add <a href="/add-new-site">Here</a></p>
