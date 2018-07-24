@@ -111,15 +111,31 @@ module.exports = function(app, db, passport) {
         maliciousPercent = Math.round(maliciousPercent * 100) / 100
         console.log('user: ' + req.user);
 
-        res.render('website', {
-          reviews: results2,
-          website: results,
-          id: req.params.id,
-          average: averageRating,
-          status: status,
-          maliciousPercent: maliciousPercent,
-          user: req.user
-        }); //Renders page (finally)
+        var usernames = [];
+        var getUsers = 'SELECT id,username FROM users;';
+        db.query(getUsers, (err, results3) => {
+          console.log(results3);
+          console.log(results2);
+          for (var i = 0; i < results2.length; i++) {
+            for (var j = 0; j < results3.length; j++) {
+              if (results2[i].originalPoster == results3[j].id) {
+                usernames.push(results3[j].username);
+              }
+            }
+          }
+
+          res.render('website', {
+            reviews: results2,
+            website: results,
+            id: req.params.id,
+            average: averageRating,
+            status: status,
+            maliciousPercent: maliciousPercent,
+            user: req.user,
+            usernames: usernames
+          }); //Renders page (finally)
+
+        })
       })
     })
   });
@@ -135,8 +151,8 @@ module.exports = function(app, db, passport) {
     var description = fixSqlQuotes(item.description);
     var link = fixSqlQuotes(item.link);
 
-    var sql1 = `INSERT INTO websites (title,description,link) ` +
-      `VALUES ("${title}","${description}","${link}");`
+    var sql1 = `INSERT INTO websites (title,description,link,createdBy) ` +
+      `VALUES ("${title}","${description}","${link}",${req.user.id});`
     // var sql2 = `CREATE TABLE ${table} ` +
     //   `(id int AUTO_INCREMENT NOT NULL, rating int, title varchar(255), review text, malicious varchar(3), originalPoster varchar(255), PRIMARY KEY(id));`
     // console.log(sql1);
@@ -162,7 +178,7 @@ module.exports = function(app, db, passport) {
     })
   })
   app.get('/remove-site', isLoggedIn, function (req,res) {
-    var sql = 'SELECT * FROM websites;'
+    var sql = `SELECT * FROM websites WHERE createdBy=${req.user.id};`
     db.query(sql, (err, results) => {
       if (err) throw err;
       console.log(results);
