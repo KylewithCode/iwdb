@@ -9,6 +9,10 @@ function fixSqlQuotes(str) {
 //   return str.toString().split('\'').join('_') + '_reviews';
 // }
 
+function deUnderscore(str) {
+  return str.toString().split('_').join(' ');
+}
+
 module.exports = function(app, db, passport) {
 
   // HOMEPAGE
@@ -148,7 +152,15 @@ module.exports = function(app, db, passport) {
       res.json(results);
     })
   });
-
+  app.post('/search', function(req, res) {
+    console.log(req.body);
+    var sql = `SELECT * From websites WHERE link = "${req.body.search}" OR title = "${req.body.search}";`
+    db.query(sql, (err, results) => {
+      if (err) throw (err);
+      console.log(results);
+      res.render('homepage', {websites: results, user: req.user, message: null});
+    })
+  })
   app.get('/remove-site', isLoggedIn, function (req,res) {
     var sql = 'SELECT * FROM websites;'
     db.query(sql, (err, results) => {
@@ -176,7 +188,7 @@ module.exports = function(app, db, passport) {
   app.post('/add-review/:title', isLoggedIn, urlencodeParser, function (req,res) {
 
     //Get website ID
-    var getSiteId = `SELECT id FROM websites WHERE title="${req.params.title}";`
+    var getSiteId = `SELECT id FROM websites WHERE title="${deUnderscore(req.params.title)}";`
     db.query(getSiteId, (err, getIdResults) => {
       if (err) throw err;
       var siteId = getIdResults[0].id

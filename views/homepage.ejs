@@ -8,6 +8,13 @@
     <title>Website Review</title>
   </head>
   <body>
+    <div class="search">
+    <form method="post" action="/search">
+      <label for="search">search</label>
+      <input type="text" name="search" placeholder="Search..." required>
+      <button id = "searchBtn" type="submit">Search</button>
+    </form>
+  </div>
     <div class="container text-center">
       <% if (message !== null) { %> <div class="alert alert-success" id="message"><%= message %></div> <% } %>
       <h1><u>Available Websites</u></h1>
@@ -18,7 +25,7 @@
             <button type="button" id="<%= i %>" class="editButton btn btn-primary btn-sm">Edit</button></li>
           <% } %>
         <% } else { %>
-          <p>There are no websites available :(</p>
+          <p>No results found... Do you want to help us? If so, Add <a href="/add-new-site">Here</a></p>
         <% } %>
       </ul>
 
