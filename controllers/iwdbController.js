@@ -4,10 +4,10 @@ const urlencodeParser = bodyParser.urlencoded({extended: false});
 function fixSqlQuotes(str) {
   return str.toString().split('\"').join('\"\"');
 }
-function tableify(str) {
-  str = str.toString().split(' ').join('_');
-  return str.toString().split('\'').join('_') + '_reviews';
-}
+// function tableify(str) {
+//   str = str.toString().split(' ').join('_');
+//   return str.toString().split('\'').join('_') + '_reviews';
+// }
 
 module.exports = function(app, db, passport) {
 
