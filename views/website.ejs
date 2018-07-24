@@ -43,8 +43,8 @@
             <% if (user.id == reviews[i].originalPoster) { %> <!-- Show buttons if orginal poster -->
               <button type="button" id="<%= reviews[i].id %>" class="editRev btn btn-primary btn-sm">Edit</button>
               <button type="button" id="<%= reviews[i].id %>" class="deleteRev btn btn-danger btn-sm">Delete</button></h3>
-            <% } else { %> <span id="originalPoster">Posted by <%= reviews[i].originalPoster %>. </span></h3> <% } %>
-          <% } else { %> <span id="originalPoster">Posted by <%= reviews[i].originalPoster %>. </span></h3>
+            <% } else { %> <span id="originalPoster">Posted by <%= usernames[i] %>. </span></h3> <% } %>
+          <% } else { %> <span id="originalPoster">Posted by <%= usernames[i] %>. </span></h3>
           <% } %>
 
           <p><%= reviews[i].review %></p>
